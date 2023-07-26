@@ -2,7 +2,8 @@
 
 /**
  * _myenv - executes the current environ.
- * @info: struct containing arguments,used to maintain the function the prototype.
+ * @info: struct containing arguments
+ * used to maintain the function the prototype.
  * Return: Always 0 (Success).
  */
 int _myenv(info_t *info)
@@ -13,7 +14,8 @@ int _myenv(info_t *info)
 
 /**
  * _getenv - gets value of environ var.
- * @info: struct containing arguments,used to maintain the funtion of the prototype.
+ * @info: struct containing arguments
+ * used to maintain the funtion of the prototype.
  * @name: environ var name.
  * Return: value.
  */
@@ -71,7 +73,8 @@ int _myunsetenv(info_t *info)
 
 /**
  * populate_env_list - populates the env linked list.
- * @info: struct containing arguments,used to maintain a constant function prototype.
+ * @info: struct containing arguments
+ * used to maintain a constant function prototype.
  * Return: Always 0 (Success).
  */
 int populate_env_list(info_t *info)

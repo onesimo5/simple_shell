@@ -23,7 +23,7 @@ char **get_environ(info_t *info)
  * used to maintain the function prototype.
  * @var: str env var property.
  * Return: 1 on delete or otherwise 0.
- *  */
+ */
 int _unsetenv(info_t *info, char *var)
 {
 	list_t *node = info->env;
