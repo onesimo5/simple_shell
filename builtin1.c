@@ -27,7 +27,11 @@ int unset_alias(info_t *info, char *str)
 	p = _strchr(str, '=');
 	if (!p)
 		return (1);
+<<<<<<< HEAD
 	c = *p;
+=======
+	c = p;
+>>>>>>> 60990f2514b6fa0692b7452066d0950907cafea0
 	*p = 0;
 	ret = delete_node_at_index(&(info->alias),
 		get_node_index(info->alias, node_starts_with(info->alias, str, -1)));
@@ -67,7 +71,11 @@ int print_alias(list_t *node)
 	if (node)
 	{
 		p = _strchr(node->str, '=');
+<<<<<<< HEAD
 		for (a = node->str; a <= p; a++)
+=======
+		for (v = node->str; a <= p; a++)
+>>>>>>> 60990f2514b6fa0692b7452066d0950907cafea0
 			_putchar(*a);
 		_putchar('\'');
 		_puts(p + 1);

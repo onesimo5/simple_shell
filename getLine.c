@@ -17,6 +17,7 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 		free(*buf);
 		*buf = NULL;
 		signal(SIGINT, sigintHandler);
+
 		r = getline(buf, &len_p, stdin);
 		r = _getline(info, buf, &len_p);
 
@@ -26,10 +27,7 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 			{
 				(*buf)[r - 1] = '\0';
 				r--;
-				(*buf)[e - 1] = '\0';
-				e--;
 			}
-
 			info->linecount_flag = 1;
 			remove_comments(*buf);
 			build_history_list(info, *buf, info->histcount++);
@@ -41,6 +39,7 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 	}
 	return (r);
 }
+
 
 /**
  * get_input - gets line -minus newline.
@@ -62,12 +61,11 @@ ssize_t get_input(info_t *info)
 	{
 		j = i;
 		p = buf + i;
-
 		check_chain(info, buf, &j, i, len);
 		while (j < len)
 		{
 			if (is_chain(info, buf, &j))
-				break;
+			break;
 			j++;
 		}
 
@@ -81,11 +79,9 @@ ssize_t get_input(info_t *info)
 		*buf_p = p;
 		return (_strlen(p));
 	}
-
 	*buf_p = buf;
 	return (r);
 }
-
 /**
  * read_buf - Reads buffer.
  * @info: the parameter structure.
@@ -133,7 +129,7 @@ int _getline(info_t *info, char **ptr, size_t *length)
 	c = _strchr(buf + i, '\n');
 	k = c ? 1 + (unsigned int)(c - buf) : len;
 	new_p = _realloc(p, s, s ? s + k : k + 1);
-	if (!new_p)
+	if (!new_p) /* MALLOC FAILURE! */
 		return (p ? free(p), -1 : -1);
 
 	if (s)
