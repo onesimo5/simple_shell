@@ -12,7 +12,7 @@ int _myexit(info_t *info)
 {
 	int exitcheck;
 
-	if (info->argv[1])  /* If there is an exit arguement */
+	if (info->argv[1])
 	{
 		exitcheck = _erratoi(info->argv[1]);
 		if (exitcheck == -1)
@@ -33,7 +33,7 @@ int _myexit(info_t *info)
 /**
  * _mycd - converts current directory of the process.
  * @info: struct containing arguments.
- * used to contain the function of the prototype.
+ * used to hold function of the prototype.
  * Return: Always 0 (Success).
  */
 int _mycd(info_t *info)
@@ -48,7 +48,7 @@ int _mycd(info_t *info)
 	{
 		dir = _getenv(info, "HOME=");
 		if (!dir)
-			chdir_ret = /* TODO: what should this be? */
+			chdir_ret =
 				chdir((dir = _getenv(info, "PWD=")) ? dir : "/");
 		else
 			chdir_ret = chdir(dir);
@@ -62,7 +62,7 @@ int _mycd(info_t *info)
 			return (1);
 		}
 		_puts(_getenv(info, "OLDPWD=")), _putchar('\n');
-		chdir_ret = /* TODO: what should this be? */
+		chdir_ret =
 			chdir((dir = _getenv(info, "OLDPWD=")) ? dir : "/");
 	}
 	else
