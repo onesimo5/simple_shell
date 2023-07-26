@@ -3,7 +3,8 @@
 /**
  * _myhistory - shows history of the list,one command line by line,procedeeding
  *  with line numbers starting from 0.
- * @info: struct containing arguments,used to contain a function of a prototype.
+ * @info: struct containing arguments
+ * used to contain a function of a prototype.
  * Return: Always 0 (Success).
  */
 int _myhistory(info_t *info)
@@ -61,16 +62,16 @@ int set_alias(info_t *info, char *str)
  */
 int print_alias(list_t *node)
 {
-	char *q = NULL, *d = NULL;
+	char *q = NULL, *v = NULL;
 
 	if (node)
 	{
 		q = _strchr(node->str, '=');
-		for (d = node->str; d <= q; d++)
-			_putchar(*d);
+		for (v = node->str; a <= q; v++)
+			_putchar(*a);
 		_putchar('\'');
 		_puts(q + 1);
-		_puts("'\n"); 
+		_puts("'\n");
 		return (0);
 	}
 	return (1);
@@ -78,12 +79,13 @@ int print_alias(list_t *node)
 
 /**
  * _myalias - Copies alias builtin.
- * @info: struct containing the arguments,used to hold a function of the prototype.
+ * @info: struct containing the arguments
+ * used to hold a function of the prototype.
  * Return: Always 0 (Success).
  */
 int _myalias(info_t *info)
 {
-	int i = 0;
+	int z = 0;
 	char *q = NULL;
 	list_t *node = NULL;
 
@@ -97,7 +99,7 @@ int _myalias(info_t *info)
 		}
 		return (0);
 	}
-	for (i = 1; info->argv[i]; i++)
+	for (z = 1; info->argv[i]; z++)
 	{
 		q = _strchr(info->argv[i], '=');
 		if (q)
