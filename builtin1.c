@@ -20,17 +20,17 @@ int _myhistory(info_t *info)
  */
 int unset_alias(info_t *info, char *str)
 {
-	char *p, c;
+	char *q, z;
 	int ret;
 
-	p = _strchr(str, '=');
-	if (!p)
+	q = _strchr(str, '=');
+	if (!q)
 		return (1);
-	c = *p;
-	*p = 0;
+	z = *q;
+	*q = 0;
 	ret = delete_node_at_index(&(info->alias),
 		get_node_index(info->alias, node_starts_with(info->alias, str, -1)));
-	*p = c;
+	*q = z;
 	return (ret);
 }
 
@@ -42,12 +42,12 @@ int unset_alias(info_t *info, char *str)
  */
 int set_alias(info_t *info, char *str)
 {
-	char *p;
+	char *q;
 
-	p = _strchr(str, '=');
-	if (!p)
+	q = _strchr(str, '=');
+	if (!q)
 		return (1);
-	if (!*++p)
+	if (!*++q)
 		return (unset_alias(info, str));
 
 	unset_alias(info, str);
@@ -61,15 +61,15 @@ int set_alias(info_t *info, char *str)
  */
 int print_alias(list_t *node)
 {
-	char *p = NULL, *a = NULL;
+	char *q = NULL, *d = NULL;
 
 	if (node)
 	{
-		p = _strchr(node->str, '=');
-		for (a = node->str; a <= p; a++)
-			_putchar(*a);
+		q = _strchr(node->str, '=');
+		for (d = node->str; d <= q; d++)
+			_putchar(*d);
 		_putchar('\'');
-		_puts(p + 1);
+		_puts(q + 1);
 		_puts("'\n"); 
 		return (0);
 	}
@@ -84,7 +84,7 @@ int print_alias(list_t *node)
 int _myalias(info_t *info)
 {
 	int i = 0;
-	char *p = NULL;
+	char *q = NULL;
 	list_t *node = NULL;
 
 	if (info->argc == 1)
@@ -99,8 +99,8 @@ int _myalias(info_t *info)
 	}
 	for (i = 1; info->argv[i]; i++)
 	{
-		p = _strchr(info->argv[i], '=');
-		if (p)
+		q = _strchr(info->argv[i], '=');
+		if (q)
 			set_alias(info, info->argv[i]);
 		else
 			print_alias(node_starts_with(info->alias, info->argv[i], '='));

@@ -3,8 +3,7 @@
  * interactive - will return true, if the shell is in interactive mode.
  * @info: structure address.
  *
- * Return: 1 if it is in interactive mode.
-* otherwise 0.
+ * Return: 1 if it is in interactive mode else 0.
  */
 int interactive(info_t *info)
 {
@@ -16,7 +15,7 @@ int interactive(info_t *info)
  * @c: character to check.
  * @delim: delimeter str.
  * Return: 1 if it is true
-* or 0, if it is false 
+ * or 0, if it is false 
  */
 int is_delim(char c, char *delim)
 {
@@ -29,8 +28,8 @@ int is_delim(char c, char *delim)
 /**
  *_isalpha - will check for any alphabetic char.
  *@c: character to insert.
- *Return: 1 if c is alphabetic 
-* or 0 otherwise.
+ *Return: 1 if c is alphabetic
+ or 0 otherwise.
  */
 
 int _isalpha(int c)

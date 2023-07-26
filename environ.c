@@ -20,13 +20,13 @@ int _myenv(info_t *info)
 char *_getenv(info_t *info, const char *name)
 {
 	list_t *node = info->env;
-	char *p;
+	char *q;
 
 	while (node)
 	{
-		p = starts_with(node->str, name);
-		if (p && *p)
-			return (p);
+		q = starts_with(node->str, name);
+		if (q && *q)
+			return (q);
 		node = node->next;
 	}
 	return (NULL);
@@ -84,4 +84,3 @@ int populate_env_list(info_t *info)
 	info->env = node;
 	return (0);
 }
-
