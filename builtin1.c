@@ -2,9 +2,9 @@
 
 /**
  * _myhistory - shows history of the list,one command line by line,procedeeding
- * with line numbers starting from 0.
+ *  with line numbers starting from 0.
  * @info: struct containing arguments
- * used to hold a function of a prototype.
+ * used to hold function of a prototype.
  * Return: Always 0 (Success).
  */
 int _myhistory(info_t *info)
@@ -21,17 +21,17 @@ int _myhistory(info_t *info)
  */
 int unset_alias(info_t *info, char *str)
 {
-	char *q, z;
+	char *p, c;
 	int ret;
 
-	q = _strchr(str, '=');
-	if (!q)
+	p = _strchr(str, '=');
+	if (!p)
 		return (1);
-	z = *q;
-	*q = 0;
+	c = *p;
+	*p = 0;
 	ret = delete_node_at_index(&(info->alias),
 		get_node_index(info->alias, node_starts_with(info->alias, str, -1)));
-	*q = z;
+	*p = c;
 	return (ret);
 }
 
@@ -43,12 +43,12 @@ int unset_alias(info_t *info, char *str)
  */
 int set_alias(info_t *info, char *str)
 {
-	char *q;
+	char *p;
 
-	q = _strchr(str, '=');
-	if (!q)
+	p = _strchr(str, '=');
+	if (!p)
 		return (1);
-	if (!*++q)
+	if (!*++p)
 		return (unset_alias(info, str));
 
 	unset_alias(info, str);
@@ -62,15 +62,15 @@ int set_alias(info_t *info, char *str)
  */
 int print_alias(list_t *node)
 {
-	char *q = NULL, *v = NULL;
+	char *p = NULL, *a = NULL;
 
 	if (node)
 	{
-		q = _strchr(node->str, '=');
-		for (v = node->str; a <= q; v++)
+		p = _strchr(node->str, '=');
+		for (a = node->str; a <= p; a++)
 			_putchar(*a);
 		_putchar('\'');
-		_puts(q + 1);
+		_puts(p + 1);
 		_puts("'\n");
 		return (0);
 	}
@@ -85,8 +85,8 @@ int print_alias(list_t *node)
  */
 int _myalias(info_t *info)
 {
-	int z = 0;
-	char *q = NULL;
+	int i = 0;
+	char *p = NULL;
 	list_t *node = NULL;
 
 	if (info->argc == 1)
@@ -99,10 +99,10 @@ int _myalias(info_t *info)
 		}
 		return (0);
 	}
-	for (z = 1; info->argv[i]; z++)
+	for (i = 1; info->argv[i]; i++)
 	{
-		q = _strchr(info->argv[i], '=');
-		if (q)
+		p = _strchr(info->argv[i], '=');
+		if (p)
 			set_alias(info, info->argv[i]);
 		else
 			print_alias(node_starts_with(info->alias, info->argv[i], '='));
