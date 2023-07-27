@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * get_environ - returns str array copy of environ
- * @info: Structure containing arguments
- * used to maintain the constant function prototype.
- * Return: Always 0 (Success).
+ * get_environ - Returns string array copy of environ.
+ * @info: struct contains potnt arguments, for Used to maintaining
+ * const function prototype.
+ * Return: always 0.
  */
 char **get_environ(info_t *info)
 {
@@ -18,25 +18,25 @@ char **get_environ(info_t *info)
 }
 
 /**
- * _unsetenv - deletes an environment var.
- * @info: Structure containing arguments
- * used to maintain the function prototype.
- * @var: str env var property.
- * Return: 1 on delete or otherwise 0.
+ * _unsetenv - removes environ var.
+ * @info: struct contains potntial arguments, for maintain
+ * const function prototype.
+ * Return: 1 for delete, 0 if othwisre
+ * @var: string env var property.
  */
 int _unsetenv(info_t *info, char *var)
 {
 	list_t *node = info->env;
 	size_t i = 0;
-	char *q;
+	char *p;
 
 	if (!node || !var)
 		return (0);
 
 	while (node)
 	{
-		q = starts_with(node->str, var);
-		if (q && *q == '=')
+		p = starts_with(node->str, var);
+		if (p && *p == '=')
 		{
 			info->env_changed = delete_node_at_index(&(info->env), i);
 			i = 0;
@@ -50,18 +50,17 @@ int _unsetenv(info_t *info, char *var)
 }
 
 /**
- * _setenv - inputs a new environment var or alters an existing one.
- * @info: Structure containing arguments
- * used to maintain constant function prototype.
- * @var: str env var property.
- * @value: the str env var value.
- * Return: Always 0 (Success).
+ * _setenv - inits new environ var, or modifies existing 1
+ * @info: struct containing potential args, Used to maintain
+ * @var: string environ var proprt.
+ * @value: string env var value.
+ *  Return: always 0.
  */
 int _setenv(info_t *info, char *var, char *value)
 {
 	char *buf = NULL;
 	list_t *node;
-	char *q;
+	char *p;
 
 	if (!var || !value)
 		return (0);
@@ -75,8 +74,8 @@ int _setenv(info_t *info, char *var, char *value)
 	node = info->env;
 	while (node)
 	{
-		q = starts_with(node->str, var);
-		if (q && *q == '=')
+		p = starts_with(node->str, var);
+		if (p && *p == '=')
 		{
 			free(node->str);
 			node->str = buf;
