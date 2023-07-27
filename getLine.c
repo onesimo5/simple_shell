@@ -2,9 +2,9 @@
 
 /**
  * input_buf - buffers any of chained cmd.
- * @info: the parameter structure.
- * @buf: the address of buffer.
- * @len: the address of len var.
+ * @info: the parametre structure.
+ * @buf: the adress of buffer.
+ * @len: the adres of len var.
  * Return: bytes to be read.
  */
 ssize_t input_buf(info_t *info, char **buf, size_t *len)
@@ -14,23 +14,26 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 
 	if (!*len)
 	{
+		/*bfree((void **)info->cmd_buf);*/
 		free(*buf);
 		*buf = NULL;
 		signal(SIGINT, sigintHandler);
-
+#if USE_GETLINE
 		r = getline(buf, &len_p, stdin);
+#else
 		r = _getline(info, buf, &len_p);
-
+#endif
 		if (r > 0)
 		{
 			if ((*buf)[r - 1] == '\n')
 			{
-				(*buf)[r - 1] = '\0';
+				(*buf)[r - 1] = '\0'; /*remove trailing newline*/
 				r--;
 			}
 			info->linecount_flag = 1;
 			remove_comments(*buf);
 			build_history_list(info, *buf, info->histcount++);
+			/* if (_strchr(*buf, ';')) is this a command chain? */
 			{
 				*len = r;
 				info->cmd_buf = buf;
@@ -40,7 +43,6 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 	return (r);
 }
 
-
 /**
  * get_input - gets line -minus newline.
  * @info: the parameter structure.
@@ -49,7 +51,7 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 ssize_t get_input(info_t *info)
 {
 	static char *buf;
-	static size_t i, j, len;
+	static size_t a, j, len;
 	ssize_t r = 0;
 	char **buf_p = &(info->arg), *p;
 
@@ -59,26 +61,28 @@ ssize_t get_input(info_t *info)
 		return (-1);
 	if (len)
 	{
-		j = i;
-		p = buf + i;
-		check_chain(info, buf, &j, i, len);
+		j = a;
+		p = buf + a;
+
+		check_chain(info, buf, &j, a, len);
 		while (j < len)
 		{
 			if (is_chain(info, buf, &j))
-			break;
+				break;
 			j++;
 		}
 
-		i = j + 1;
-		if (i >= len)
+		a = j + 1;
+		if (a >= len)
 		{
-			i = len = 0;
+			a = len = 0;
 			info->cmd_buf_type = CMD_NORM;
 		}
 
 		*buf_p = p;
 		return (_strlen(p));
 	}
+
 	*buf_p = buf;
 	return (r);
 }
@@ -87,7 +91,7 @@ ssize_t get_input(info_t *info)
  * @info: the parameter structure.
  * @buf: the Buffer.
  * @i: The size.
- * Return: e.
+ * Return: r.
  */
 ssize_t read_buf(info_t *info, char *buf, size_t *i)
 {
@@ -129,7 +133,7 @@ int _getline(info_t *info, char **ptr, size_t *length)
 	c = _strchr(buf + i, '\n');
 	k = c ? 1 + (unsigned int)(c - buf) : len;
 	new_p = _realloc(p, s, s ? s + k : k + 1);
-	if (!new_p)
+	if (!new_p) /* MALLOC FAILURE! */
 		return (p ? free(p), -1 : -1);
 
 	if (s)
