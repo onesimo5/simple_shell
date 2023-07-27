@@ -7,14 +7,14 @@
  */
 size_t list_len(const list_t *h)
 {
-	size_t i = 0;
+	size_t a = 0;
 
 	while (h)
 	{
 		h = h->next;
-		i++;
+		a++;
 	}
-	return (i);
+	return (a);
 }
 
 /**
@@ -104,14 +104,14 @@ list_t *node_starts_with(list_t *node, char *prefix, char c)
  */
 ssize_t get_node_index(list_t *head, list_t *node)
 {
-	size_t i = 0;
+	size_t a = 0;
 
 	while (head)
 	{
 		if (head == node)
-			return (i);
+			return (a);
 		head = head->next;
-		i++;
+		a++;
 	}
 	return (-1);
 }
