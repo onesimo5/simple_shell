@@ -104,7 +104,7 @@ int read_history(info_t *info)
  * @info:struct containing arguments.
  * @buf:the buffer.
  * @linecount:the history linecount and historycount.
- * Return:Always 0 on (Success).
+ * Return:Always 0 .
  */
 int build_history_list(info_t *info, char *buf, int linecount)
 {
@@ -127,12 +127,12 @@ int build_history_list(info_t *info, char *buf, int linecount)
 int renumber_history(info_t *info)
 {
 	list_t *node = info->history;
-	int i = 0;
+	int a = 0;
 
 	while (node)
 	{
-		node->num = i++;
+		node->num = a++;
 		node = node->next;
 	}
-	return (info->histcount = i);
+	return (info->histcount = a);
 }
