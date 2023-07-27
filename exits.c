@@ -1,26 +1,26 @@
 #include "shell.h"
 
 /**
- **_strncpy - clones str.
- *@dest: the dest of the str to be cloned to.
- *@src: main str.
- *@n: amount of chars to be cloned.
- *Return: concatenated str.
+ **_strncpy - copying a str.
+ *@dest:the dest str to be copied.
+ *@src: the source str.
+ *@n: the amount of charact's to be copied.
+ *Return: the concatnatd str.
  */
 char *_strncpy(char *dest, char *src, int n)
 {
-	int i, j;
+	int a, j;
 	char *s = dest;
 
-	i = 0;
-	while (src[i] != '\0' && i < n - 1)
+	a = 0;
+	while (src[a] != '\0' && a < n - 1)
 	{
-		dest[i] = src[i];
-		i++;
+		dest[a] = src[a];
+		a++;
 	}
-	if (i < n)
+	if (a < n)
 	{
-		j = i;
+		j = a;
 		while (j < n)
 		{
 			dest[j] = '\0';
@@ -31,37 +31,37 @@ char *_strncpy(char *dest, char *src, int n)
 }
 
 /**
- **_strncat - concat two strings.
- *@dest: first str.
- *@src: second str.
- *@n: amount of bytes to be used
- *Return: concatenated str.
+ **_strncat - Concatenates two str's.
+ *@dest: 1st str.
+ *@src: 2nd str.
+ *@n: amount of bytes to use.
+ *Return: concatd str.
  */
 char *_strncat(char *dest, char *src, int n)
 {
-	int i, j;
+	int a, j;
 	char *s = dest;
 
-	i = 0;
+	a = 0;
 	j = 0;
-	while (dest[i] != '\0')
-		i++;
+	while (dest[a] != '\0')
+		a++;
 	while (src[j] != '\0' && j < n)
 	{
-		dest[i] = src[j];
-		i++;
+		dest[a] = src[j];
+		a++;
 		j++;
 	}
 	if (j < n)
-		dest[i] = '\0';
+		dest[a] = '\0';
 	return (s);
 }
 
 /**
- **_strchr - finds a char in a str.
- *@s: str to be parsed,
- *@c: char to beware of.
- *Return: pointer to the memory area s.
+ **_strchr - locates char in a str.
+ *@s: str to parsed.
+ *@c: char to look fr.
+ *Return: The pointr to memory area s.
  */
 char *_strchr(char *s, char c)
 {
