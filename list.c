@@ -79,16 +79,16 @@ list_t *add_node_end(list_t **head, const char *str, int num)
  */
 size_t print_list_str(const list_t *h)
 {
-	size_t i = 0;
+	size_t a = 0;
 
 	while (h)
 	{
 		_puts(h->str ? h->str : "(nil)");
 		_puts("\n");
 		h = h->next;
-		i++;
+		a++;
 	}
-	return (i);
+	return (a);
 }
 
 /**
