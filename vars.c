@@ -74,11 +74,11 @@ void check_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len)
  */
 int replace_alias(info_t *info)
 {
-	int i;
+	int a;
 	list_t *node;
 	char *p;
 
-	for (i = 0; i < 10; i++)
+	for (a = 0; a < 10; a++)
 	{
 		node = node_starts_with(info->alias, info->argv[0], '=');
 		if (!node)
