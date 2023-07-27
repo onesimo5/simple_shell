@@ -1,82 +1,84 @@
 #include "shell.h"
 
 /**
- *_eputs - executes input str.
- * @str: the str to be printed.
- * Return: Nothing.
+ * _eputs - prints input string.
+ * @str: the str to print.
+ *
+ * Return: nothing 0.
  */
 void _eputs(char *str)
 {
-	int i = 0;
+	int a = 0;
 
 	if (!str)
 		return;
-	while (str[i] != '\0')
+	while (str[a] != '\0')
 	{
-		_eputchar(str[i]);
-		i++;
+		_eputchar(str[a]);
+		a++;
 	}
 }
 
 /**
- * _eputchar - prints char c to stderr.
- * @c: char to print.
- * Return: 1.
- * on error, -1 is returned and errno is set accordingly.
+ * _eputchar - writes char c to stderr.
+ * @c: the charact to print.
+ * Return: on success 1
+ * On error, returned -1, and erno is set.
  */
 int _eputchar(char c)
 {
-	static int i;
+	static int a;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || a >= WRITE_BUF_SIZE)
 	{
-		write(2, buf, i);
-		i = 0;
+		write(2, buf, a);
+		a = 0;
 	}
 	if (c != BUF_FLUSH)
-		buf[i++] = c;
+		buf[a++] = c;
 	return (1);
 }
 
 /**
- * _putfd - prints char c to given fd.
- * @c: char to print.
- * @fd: filedescriptor to print.
- * Return: 1.
- * on error, -1 is returned and errno is set accordingly.
+ * _putfd - write character c to the given fd.
+ * @c: the charact to print.
+ * @fd: Fileescriptor to write
+ *
+ * Return: on success 1.
+ * on error, returned -1, and erno is set well
  */
 int _putfd(char c, int fd)
 {
-	static int i;
+	static int a;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || a >= WRITE_BUF_SIZE)
 	{
-		write(fd, buf, i);
-		i = 0;
+		write(fd, buf, a);
+		a = 0;
 	}
 	if (c != BUF_FLUSH)
-		buf[i++] = c;
+		buf[a++] = c;
 	return (1);
 }
 
 /**
- *_putsfd - writes an input str.
- * @str: str to be written.
- * @fd: filedescriptor to print.
+ * _putsfd - print input string
+ * @str: the string to print
+ * @fd: filedescriptor to write
  *
- * Return: the number of chars put
+ * Return: numbs characters put
  */
 int _putsfd(char *str, int fd)
 {
-	int i = 0;
+	int a = 0;
 
 	if (!str)
 		return (0);
 	while (*str)
 	{
-		i += _putfd(*str++, fd);
+		a += _putfd(*str++, fd);
 	}
-	return (i);
+	return (a);
 }
